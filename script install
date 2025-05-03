@@ -1,27 +1,46 @@
 #!/bin/bash
 
-# actualizar sistema
+set -e  # Salir si hay un error
+
+echo "🔄 Actualizando el sistema..."
 sudo apt update
 sudo apt upgrade -y
 
-# instalar GIT
-sudo apt install git -y
+# Lista de paquetes esenciales
+PACKAGES=("git" "locales" "policykit-1")
 
-# instalar locales
-sudo apt install locales -y
+echo "📦 Verificando e instalando paquetes necesarios..."
+for pkg in "${PACKAGES[@]}"; do
+    if ! dpkg -s "$pkg" &>/dev/null; then
+        echo "🔧 Instalando $pkg..."
+        sudo apt install -y "$pkg"
+    else
+        echo "✅ $pkg ya está instalado."
+    fi
+done
+
+echo "🌐 Configurando locales..."
 sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+sudo locale-gen en_US.UTF-8
 
-# instalar policykit-1
-sudo apt install policykit-1 -y
+echo "🔍 Verificando instalación de KIAUH..."
+if [ -d "$HOME/kiauh" ]; then
+    echo "✅ KIAUH ya está instalado en ~/kiauh."
+else
+    echo "⬇️ Clonando KIAUH..."
+    git clone https://github.com/dw-0/kiauh.git ~/kiauh
+fi
 
-# instalar kiauh
-cd ~ && git clone https://github.com/dw-0/kiauh.git
+echo "🚀 Iniciando instalador de KIAUH..."
+bash ~/kiauh/kiauh.sh
 
-# ejecutar Kiauh
-./kiauh/kiauh.sh
+echo "📁 Verificando archivos de configuración personalizados..."
+if [ ! -d "$HOME/ender3-klipper" ]; then
+    git clone https://github.com/Rocosso/ender3-klipper.git ~/ender3-klipper
+fi
 
-# copiar archivos a la instalacion de moonraker y klipper
-cd ~ && git clone https://github.com/Rocosso/ender3-klipper.git
-cp -r ender3-kliper/* printer_data/config/
+echo "📂 Copiando archivos de configuración a printer_data/config/"
+cp -r ~/ender3-klipper/* ~/printer_data/config/
 
+echo "✅ Instalación y configuración completada."
 
