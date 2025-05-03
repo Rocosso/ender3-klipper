@@ -9,9 +9,7 @@ sudo apt install git -y
 
 # instalar locales
 sudo apt install locales -y
-echo 'export LANG=en_US.UTF-8' >> ~/.bashrc
-echo 'export LC_ALL=en_US.UTF-8' >> ~/.bashrc
-source ~/.bashrc
+sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 # instalar policykit-1
 sudo apt install policykit-1 -y
