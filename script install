@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# actualizar sistema
+sudo apt update
+sudo apt upgrade -y
+
+# instalar GIT
+sudo apt install git -y
+
+# instalar kiauh
+cd ~ && git clone https://github.com/dw-0/kiauh.git
+
+# ejecutar Kiauh
+./kiauh/kiauh.sh
+
+# copiar archivos a la instalacion de moonraker y klipper
+cd ~ && git clone https://github.com/Rocosso/ender3-klipper.git
+cp -r ender3-kliper/* printer_data/config/
