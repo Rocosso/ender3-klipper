@@ -13,6 +13,9 @@ echo 'export LANG=en_US.UTF-8' >> ~/.bashrc
 echo 'export LC_ALL=en_US.UTF-8' >> ~/.bashrc
 source ~/.bashrc
 
+# instalar policykit-1
+sudo apt install policykit-1 -y
+
 # instalar kiauh
 cd ~ && git clone https://github.com/dw-0/kiauh.git
 
@@ -23,5 +26,4 @@ cd ~ && git clone https://github.com/dw-0/kiauh.git
 cd ~ && git clone https://github.com/Rocosso/ender3-klipper.git
 cp -r ender3-kliper/* printer_data/config/
 
-# instalar policykit-1
-sudo apt install policykit-1 -y
+
