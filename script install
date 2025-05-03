@@ -7,6 +7,9 @@ sudo apt upgrade -y
 # instalar GIT
 sudo apt install git -y
 
+# instalar locales
+sudo apt install locales -y
+
 # instalar kiauh
 cd ~ && git clone https://github.com/dw-0/kiauh.git
 
