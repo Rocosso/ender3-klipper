@@ -16,3 +16,6 @@ cd ~ && git clone https://github.com/dw-0/kiauh.git
 # copiar archivos a la instalacion de moonraker y klipper
 cd ~ && git clone https://github.com/Rocosso/ender3-klipper.git
 cp -r ender3-kliper/* printer_data/config/
+
+# instalar policykit-1
+sudo apt install policykit-1 -y
